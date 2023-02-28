@@ -1,0 +1,23 @@
+---
+threads: 6
+dpi: 50
+
+frames_per_day: 1
+frames_for_line: 30
+title_format: "%Y" #"%d %b %Y"
+
+point_decay_days: 15
+point_size: 4
+transparency_alpha: 1
+
+### Region
+
+
+### World
+#date format Year-Month-Day
+start_date: 1997-01-01
+end_date: 2002-12-31
+world_json: world.json
+world_cases: world_cases.csv
+centroids_file: ../../depot/centroids.csv
+transfers_file: transfers.csv

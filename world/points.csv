@@ -1,0 +1,25 @@
+ID,Country,Region,Longtitude,Latitude
+TID_1,Tanzania,,34.888,-6.369
+TID_2,USA,North Carolina,-79.432,35.740
+TID_3,Egypt,,30.802,26.820
+TID_4,Sudan,,30.217,12.862
+TID_5,Australia,New South Wales,146.292,-32.244
+TID_6,South Africa,,22.937,-30.559
+TID_7,USA,,-95.712,37.090
+TID_8,Canada,Manitoba,-97.610,55.266
+TID_9,Portugal,,-8.224,39.399
+TID_10,Ethiopia,,40.489,9.145
+TID_11,Jamaica,,-77.297,18.109
+TID_12,Mexico,,-102.552,23.634
+TID_13,Cuba,,-77.781,21.521
+TID_14,El Salvador,,-88.896,13.794
+TID_15,Philippines,,121.774,12.879
+TID_16,Central African Republic,,20.939,6.611
+TID_17,Italy,Calabria,16.102,38.537
+TID_18,Nicaragua,,-85.207,12.865
+TID_19,Brazil, Sao Paulo,-48.564,-22.191
+TID_20,South Korea,,127.766,35.907
+TID_21,Costa Rica,,-83.753,9.748
+TID_22,China,Guangdong,113.797,23.677
+TID_23,Colombia,,-74.297,4.570
+TID_24,Guatemala,,-90.230,15.783
