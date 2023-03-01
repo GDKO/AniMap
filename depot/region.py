@@ -8,7 +8,7 @@
       -c, --config_file <FILE>      config_file
 """
 
-import matplotlib
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import geopandas as gpd
 import csv
@@ -28,6 +28,8 @@ from depot.AniMapLib import get_values_curved_line, split, progress, title, remo
 
 
 def fplot(j_list):
+
+    L, Title, i, out_dir, data, data2, dpi = j_list
 
     municipalities_colors = ["lightskyblue", "#009fff" ,"#0060ff", "#0020ff", "#0000b3"]
     fig = plt.figure(figsize=(9,6))
@@ -58,9 +60,9 @@ def fplot(j_list):
     ax3.set_axis_off()
 
     # Title
-    fig.suptitle(j_list[1])
+    fig.suptitle(Title)
 
-    for frame in j_list[0]:
+    for frame in L:
         if frame[0] == "p":
             ax1.plot(frame[1], frame[2], marker="o", markersize=frame[3], alpha=frame[4], markerfacecolor=frame[5], markeredgecolor=frame[5])
         elif frame[0] == "l":
@@ -87,7 +89,7 @@ def fplot(j_list):
     ax2.set_aspect("auto")
     plt.text(0.075,0.5,"Sicily",transform=ax1.transAxes)
     plt.text(0.6,0.77,"Calambria",transform=ax1.transAxes)
-    plt.savefig(j_list[3] + "/frame_%05d.png"%(j_list[2]),format="png") #dpi=300
+    plt.savefig(out_dir + "/frame_%05d.png"%(i),format="png",dpi=dpi) #dpi=300
     plt.close()
 
 def main():
@@ -100,17 +102,26 @@ def main():
     stream.close()
 
     threads = config_opts["threads"]
-    title_format = config_opts["title_format"]
+    dpi = config_opts["dpi"]
+    title_format = config_opts["title_format_region"]
     frames_per_day = config_opts["frames_per_day"]
     frames_for_line = config_opts["frames_for_line"]
+    start_date = config_opts["start_date"]
+    end_date = config_opts["end_date"]
     point_decay_days = config_opts["point_decay_days"]
     point_size = config_opts["point_size"]
     transparency_alpha = config_opts["transparency_alpha"]
+
+    region_json = config_opts["region_json"]
+    municipalities_json=config_opts["municipalities_json"]
+    region_cases = config_opts["region_cases"]
+    region_transfers_file = config_opts["world_transfers_file"]
+    milestones = config_opts["milestones"]
     ##
 
     st = time.time() #tm
-    data = gpd.read_file("geojson-italy/geojson/limits_IT_provinces.geojson")
-    data2 = gpd.read_file("geojson-italy/geojson/R_18_R_19.geojson")
+    data = gpd.read_file(region_json)
+    data2 = gpd.read_file(municipalities_json)
     municipalities = []
     municipalities_cases = {}
     for name in data2.name:
@@ -129,10 +140,6 @@ def main():
     size_decay = point_size / point_decay_frames
     transparency_decay = transparency_alpha / point_decay_frames
 
-    #initialize days
-    start_date = date(2014, 9, 1) #year,month,day (2014,9,1)
-    end_date = date(2022, 5, 1) #(2022, 5, 1)
-
     delta = end_date - start_date
     delta_days = delta.days
     limit = delta_days * frames_per_day
@@ -148,7 +155,7 @@ def main():
     points = {}
 
     st = time.time() #tm
-    with open("Tf_files/all.csv") as csvfile:
+    with open(region_cases) as csvfile:
         reader = csv.reader(csvfile,delimiter=",")
         for row in reader:
             i_id = row.index('ID')
@@ -227,7 +234,7 @@ def main():
     print("Parsed points file in " + str(int(et)) + " seconds.") #tm
 
     st = time.time() #tm
-    with open("transfer_italy.csv") as csvfile:
+    with open(region_transfers_file) as csvfile:
         reader = csv.reader(csvfile,delimiter=",")
         for row in reader:
             i_from = row.index('from')
@@ -254,7 +261,7 @@ def main():
 
 
     st = time.time() #tm
-    with open("milestones.csv") as csvfile:
+    with open(milestones) as csvfile:
         reader = csv.reader(csvfile,delimiter=",")
         for row in reader:
             i_day = row.index('Day')
@@ -286,7 +293,7 @@ def main():
     st = time.time() #tm
     j_list=[]
     for i in range(len(Title)):
-        j = [L[i],Title[i],i,out_dir]
+        j = [L[i],Title[i],i,out_dir, data, data2, dpi]
         j_list.append(j)
 
     i=0

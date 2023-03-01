@@ -87,7 +87,7 @@ def main():
     world_json = config_opts["world_json"]
     world_cases = config_opts["world_cases"]
     centroids_file = config_opts["centroids_file"]
-    transfers_file = config_opts["transfers_file"]
+    transfers_file = config_opts["world_transfers_file"]
     ##
 
     st = time.time() #tm
