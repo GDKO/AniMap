@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 """
     Usage:
-      animap region -c <FILE>
+      animap region -c <FILE> -o <DIR>
 
     Options:
       -h, --help                    show this
       -c, --config_file <FILE>      config_file
+      -o, --output <DIR>            creates a directory for all output files
 """
 
 import matplotlib as mpl
@@ -24,7 +25,7 @@ from multiprocessing import Pool
 from matplotlib.gridspec import GridSpec
 from matplotlib.lines import Line2D
 
-from depot.AniMapLib import get_values_curved_line, split, progress, title, remove_frames
+from depot.AniMapLib import get_values_curved_line, split, progress, title, remove_frames, get_outdir
 
 
 def fplot(j_list):
@@ -95,6 +96,7 @@ def fplot(j_list):
 def main():
     args = docopt(__doc__)
     config_yaml = args['--config_file']
+    out_dir = get_outdir(args['--output'])
 
     # Load config_file
     stream = open(config_yaml, 'r')
@@ -143,9 +145,6 @@ def main():
     delta = end_date - start_date
     delta_days = delta.days
     limit = delta_days * frames_per_day
-
-    # output_dir
-    out_dir="test_it"
 
     #graph title
     Title=title(title_format,start_date,delta_days,frames_per_day)

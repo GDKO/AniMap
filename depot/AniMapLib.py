@@ -101,3 +101,17 @@ def progress(iteration, steps, max_value, no_limit=False):
         sys.stdout.flush()
     else:
         pass
+
+def get_outdir(out_directory, add_dir=""):
+    """generates output directory in case it does not exist."""
+    if type(out_directory) != str:
+        print("\t[!] {} is NOT a directory! Please specify an output directory".format(out_directory))
+        sys.exit()
+    elif os.path.isfile(out_directory):
+        print("\t[!] {} is a File! Please specify an output directory".format(out_directory))
+        sys.exit()
+    elif not os.path.exists(os.path.join(out_directory, add_dir)):
+        os.mkdir(os.path.join(out_directory, add_dir))
+        return os.path.abspath(os.path.join(out_directory, add_dir))
+    else:
+        return os.path.abspath(os.path.join(out_directory, add_dir))
