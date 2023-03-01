@@ -79,7 +79,7 @@ def main():
 
     threads = config_opts["threads"]
     dpi = config_opts["dpi"]
-    title_format = config_opts["title_format"]
+    title_format = config_opts["title_format_world"]
     frames_per_day = config_opts["frames_per_day"]
     frames_for_line = config_opts["frames_for_line"]
     start_date = config_opts["start_date"]
