@@ -1,4 +1,5 @@
 import sys
+import os
 import numpy as np
 import bezier
 from datetime import timedelta
