@@ -22,7 +22,7 @@ from datetime import date, timedelta
 from unidecode import unidecode
 from multiprocessing import Pool
 
-from depot.AniMapLib import get_values_curved_line, split, progress, title, remove_frames
+from depot.AniMapLib import get_values_curved_line, split, progress, title
 
 def fplot(j_list):
 
@@ -234,9 +234,6 @@ def main():
 
     et = time.time() - st #tm
     print("Parsed transfers file in " + str(int(et)) + " seconds.") #tm
-
-    # Scale to 1 frame empty days of ax1
-    L,Title = remove_frames(L,Title,limit,frames_per_day)
 
     #Plotting the frames
     st = time.time() #tm

@@ -10,7 +10,7 @@ point_size: 4
 transparency_alpha: 1
 
 ### Region
-title_format_region: %d %b %Y"
+title_format_region: "%d %b %Y"
 
 ### World
 title_format_world: "%Y"
