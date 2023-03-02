@@ -1,0 +1,1 @@
+- Centroids file modified from [here](https://github.com/gavinr/world-countries-centroids)
